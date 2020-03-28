@@ -61,7 +61,7 @@ typings/
 
 .idea
 
-example/*.js
+
 example/*.map
 yarn-error.log
 dist/
