@@ -8,7 +8,7 @@ import {
   SourceOption, VideoErrorType,
   VideoSourceChangeEventDetail
 } from "./model";
-import {ZaojiuPlayer} from "./player";
+import {Player} from "./player";
 import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
@@ -1048,12 +1048,12 @@ export class FullScreenControl implements BaseElement {
   private enterFullscreenBtnEl: HTMLElement;
   private exitFullscreenBtnEl: HTMLElement;
   private video: VideoPlayer;
-  private player: ZaojiuPlayer;
+  private player: Player;
   private rendered: boolean;
   private event$: Observable<PlayerEvent>;
   private eventSub: Subscription;
 
-  constructor(container: BaseElement, video: VideoPlayer, player: ZaojiuPlayer, event$: Observable<PlayerEvent>) {
+  constructor(container: BaseElement, video: VideoPlayer, player: Player, event$: Observable<PlayerEvent>) {
     this.video = video;
     this.container = container;
     this.player = player;
@@ -1198,7 +1198,7 @@ export class ToolBarControl implements BaseElement {
   private event$: Observable<PlayerEvent>;
   private eventSub: Subscription;
 
-  constructor(container: BaseElement, option: Option, video: VideoPlayer, player: ZaojiuPlayer) {
+  constructor(container: BaseElement, option: Option, video: VideoPlayer, player: Player) {
     this.container = container;
     this.video = video;
     this.event$ = player.event$;
@@ -1298,7 +1298,7 @@ export class Controls implements BaseElement {
   private container: BaseElement;
   private rendered: boolean;
 
-  constructor(container: BaseElement, option: Option, video: VideoPlayer, player: ZaojiuPlayer, event$: Observable<PlayerEvent>) {
+  constructor(container: BaseElement, option: Option, video: VideoPlayer, player: Player, event$: Observable<PlayerEvent>) {
     this.container = container;
     this.event$ = event$;
 

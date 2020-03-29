@@ -1,7 +1,7 @@
-import {ZaojiuPlayer} from "../src/player";
+import {Player} from "../src/player";
 import {FlashVideo} from "../src/flash";
 
-ZaojiuPlayer.use(FlashVideo);
+Player.use(FlashVideo);
 
 const srcHD =  {
   src: 'https://luodexun.oss-cn-beijing.aliyuncs.com/video/%E8%8B%B1%E9%9B%84%E8%81%94%E7%9B%9F%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B32017cg_%E9%AB%98%E6%B8%85',
@@ -25,4 +25,4 @@ const srcHD =  {
 //   quality: '标清',
 //   mimetype: 'video/mp4'
 // };
-const player = new ZaojiuPlayer({element: 'player', playList: [srcHD]});
+const player = new Player({element: 'player', playList: [srcHD]});

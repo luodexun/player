@@ -66,8 +66,16 @@ module.exports = {
           loader: "sass-loader" // compiles Sass to CSS
         }]
       },
-
-      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name:'images/[name].[ext]',
+            limit:2048
+          }
+        }
+      },
       {
         test: /\.ts$/,
         exclude: /node_modules/,

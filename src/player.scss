@@ -62,6 +62,27 @@ $color-primary: #00D7C6;
     }
   }
 
+  .member{
+    position: absolute;
+    right: 0;
+    bottom: 5rem;
+    width: 4rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    img{
+     display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 4px;
+    }
+    h5{
+      color: white;
+      text-align: center;
+    }
+  }
+
   .video {
     position: absolute;
     left: 0;

@@ -3,6 +3,7 @@ import {Language, Option, PlayerEvent} from "./model";
 import {BaseElement} from "./interface";
 import {createElementByString, IS_MOBILE} from "./utils";
 import {Controls} from "./controls";
+import {MemberControler} from './member';
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/filter';
 import {Observable} from "rxjs/Observable";
@@ -14,10 +15,11 @@ const template = `
   <div class="${styles.player} ${IS_MOBILE ? styles.touchable : ''}"></div>
 `;
 
-export class ZaojiuPlayer implements BaseElement {
+export class Player implements BaseElement {
   el: HTMLElement;
   video: VideoPlayer;
   controls: Controls;
+  member:MemberControler;
   eventSource = new Subject<PlayerEvent>();
   event$: Observable<PlayerEvent> = this.eventSource.asObservable();
   option: Option;
@@ -45,6 +47,7 @@ export class ZaojiuPlayer implements BaseElement {
     this.option = optionParsed;
     this.el = createElementByString(template).item(0) as HTMLElement;
     this.prepareVideo();
+    this.prepareMember();
     this.prepareControls();
     this.perpareVideoSource();
     this.render();
@@ -64,12 +67,17 @@ export class ZaojiuPlayer implements BaseElement {
     this.video = new VideoPlayer(this, this.option, this.eventSource, this.event$);
   }
 
+  private prepareMember() {
+    this.member = new MemberControler(this, this.option, this.eventSource, this.event$);
+  }
+
   private perpareVideoSource() {
     this.video.setSrc(this.option.playList);
   }
 
   render() {
     this.video.render();
+    this.member.render();
     this.controls.render();
 
     const container: HTMLElement = this.getTargetElement();
@@ -88,7 +96,7 @@ export class ZaojiuPlayer implements BaseElement {
   destroy() {
     this.video.destroy();
     this.controls.destroy();
-
+    this.member.destroy();
     const container = this.getTargetElement();
     container.style.position = this.containerPositionCache;
     container.innerHTML = '';

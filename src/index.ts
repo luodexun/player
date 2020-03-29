@@ -1,3 +1,3 @@
-import { ZaojiuPlayer } from "./player";
+import { Player } from "./player";
 
-module.exports = ZaojiuPlayer;
+module.exports = Player;

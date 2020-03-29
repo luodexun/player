@@ -59,7 +59,16 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader'
       },
-
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name:'images/[name].[ext]',
+            limit:2048
+          }
+        }
+      },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         enforce: "pre",
