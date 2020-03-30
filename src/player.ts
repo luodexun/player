@@ -1,5 +1,5 @@
 import {VideoPlayer} from "./video";
-import {Language, Option, PlayerEvent} from "./model";
+import {Language, Option, PlayerEvent, PlayerEventType} from "./model";
 import {BaseElement} from "./interface";
 import {createElementByString, IS_MOBILE} from "./utils";
 import {Controls} from "./controls";
@@ -7,6 +7,7 @@ import {MemberControler} from './member';
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/filter';
 import {Observable} from "rxjs/Observable";
+import * as _ from 'lodash';
 const styles = require('./player.scss');
 
 const ElementQueries = require('css-element-queries/src/ElementQueries');
@@ -40,16 +41,26 @@ export class Player implements BaseElement {
     if (option instanceof Option) {
       optionParsed = option as Option;
     } else {
-      optionParsed = new Option(option.element, option.playList,
-        option.autoplay, option.preload, option.loop,
-        option.controls, option.swf);
+      optionParsed = new Option(
+        option.element,
+        option.playList,
+        option.cover,
+        option.memberOption,
+        option.autoplay,
+        option.preload,
+        option.loop,
+        option.controls,
+        option.swf,
+        option.on
+      );
     }
     this.option = optionParsed;
     this.el = createElementByString(template).item(0) as HTMLElement;
     this.prepareVideo();
-    this.prepareMember();
     this.prepareControls();
+    this.prepareMember();
     this.perpareVideoSource();
+    this.bindEvent();
     this.render();
   }
 
@@ -75,10 +86,16 @@ export class Player implements BaseElement {
     this.video.setSrc(this.option.playList);
   }
 
+  private bindEvent() {
+    this.event$.filter(e => _.indexOf([PlayerEventType.like,PlayerEventType.share,PlayerEventType.goods,PlayerEventType.back], e.type) !== -1).subscribe((e:PlayerEvent|any)=>{
+      this.option.on(e);
+    })
+}
+
   render() {
     this.video.render();
-    this.member.render();
     this.controls.render();
+    this.member.render();
 
     const container: HTMLElement = this.getTargetElement();
     const style: CSSStyleDeclaration = window.getComputedStyle ? getComputedStyle(container, null) : (<any>container)['currentStyle'];

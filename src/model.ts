@@ -12,6 +12,10 @@ export class FullScreenApi {
 export enum PlayerEventType {
   SourceChange = 'sourcechange',
   RetryPlay = 'retryplay',
+  goods = 'goods',
+  like = 'like',
+  back = 'back',
+  share = 'share',
 }
 
 export class PlayerEvent {
@@ -73,6 +77,34 @@ export class ControlsOption {
   }
 }
 
+export class MemberOption {
+  avatar: string;
+  comment: Comment[];
+  shop_url: string;
+  like:string;
+
+  constructor(avatar: string, comment: Comment[], shop_url: string, like:string) {
+    this.avatar = avatar;
+    this.comment = comment;
+    this.shop_url = shop_url;
+    this.like = like;
+  }
+}
+
+export class Comment {
+  time: number;
+  content: string;
+  avatar: string;
+  nickname:string;
+
+  constructor(time: number, content: string, avatar: string, nickname:string) {
+    this.time = time;
+    this.content = content;
+    this.avatar = avatar;
+    this.nickname = nickname;
+  }
+}
+
 export class SourceOption {
   src: string;
   quality: string;
@@ -88,32 +120,41 @@ export class SourceOption {
 export class Option {
   element: string | HTMLElement;
   playList: (SourceOption | MediaSource)[][] = [[]];
+  cover='';
+  memberOption:MemberOption;
   autoplay = false;
   preload = 'metadata';
   loop = false;
   // playsinline = true;
   controls: boolean | ControlsOption = true;
   swf = `video-js.swf`;
+  on:(e:PlayerEvent)=>void;
 
   constructor(element: string | HTMLElement,
               playList: string | MediaSource | SourceOption |
                 (string | MediaSource | SourceOption)[] |
                 (string | SourceOption | MediaSource)[][],
+              cover:string,
+              memberOption:MemberOption,
               autoplay = false,
               preload = 'metadata',
               loop = false,
               // playsinline = true,
               controls: boolean | ControlsOption = true,
               swf = `video-js.swf`,
+              on = (e:PlayerEvent)=>{ console.log('未定义')},
   ) {
     if (!element) throw new Error('Must specify an element id or pass a DOMElement');
     this.element = element;
     this.playList = parsePlayList(playList);
+    this.cover = cover;
+    this.memberOption = memberOption;
     this.autoplay = autoplay;
     this.loop = loop;
     // this.playsinline = playsinline;
     this.preload = preload;
     this.controls = controls;
+    this.on = on;
   }
 }
 

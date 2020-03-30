@@ -64,22 +64,37 @@ $color-primary: #00D7C6;
 
   .member{
     position: absolute;
-    right: 0;
+    right: 1rem;
     bottom: 5rem;
     width: 4rem;
-    height: 20rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    >img{
+      padding: 0 !important;
+      border-radius: 50%;
+    }
     img{
-     display: block;
+      display: block;
       width: 100%;
       box-sizing: border-box;
-      padding: 4px;
+      padding: 15px 5px 0;
     }
     h5{
       color: white;
       text-align: center;
+    }
+  }
+
+  .top{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 3rem;
+    padding: 1.7rem;
+    display: flex;
+    justify-content: space-between;
+    img{
+      display: block;
+      height: 100%;
     }
   }
 

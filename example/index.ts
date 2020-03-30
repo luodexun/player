@@ -1,10 +1,11 @@
 import {Player} from "../src/player";
+import {PlayerEvent} from "../src/model";
 import {FlashVideo} from "../src/flash";
 
 Player.use(FlashVideo);
 
 const srcHD =  {
-  src: 'https://luodexun.oss-cn-beijing.aliyuncs.com/video/%E8%8B%B1%E9%9B%84%E8%81%94%E7%9B%9F%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B32017cg_%E9%AB%98%E6%B8%85',
+  src: 'http://study-1252796609.cos.ap-shanghai.myqcloud.com/video/2F21CADD-1BBD-400D-A417-0BC7B95032BA.MP4',
   quality: '超清',
   mimetype: 'video/mp4'
 };
@@ -25,4 +26,17 @@ const srcHD =  {
 //   quality: '标清',
 //   mimetype: 'video/mp4'
 // };
-const player = new Player({element: 'player', playList: [srcHD]});
+const player = new Player({
+  element: 'player',
+  playList: [srcHD],
+  cover:'http://image.haipaitv.cn/video/20200326/db33fba1dedebf08ee37ddcd1a498f4c.jpg',
+  memberOption: {
+    avatar:'http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg',
+    comment:[],
+    shop_url:'',
+    like:''
+  },
+  on:function (event:PlayerEvent|any) {
+    console.log(event.type)
+  }
+});

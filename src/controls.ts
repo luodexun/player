@@ -38,7 +38,6 @@ export class BigPlayBtnControl implements BaseElement {
 
   private bindEvent() {
     this.eventSub = this.event$.subscribe(e => {
-      console.log(e.type);
       if (e.type === 'play') {
         this.hide();
       } else if (e.type === 'reset') {
@@ -1314,12 +1313,12 @@ export class Controls implements BaseElement {
   }
 
   private bindEvent() {
-    this.el.addEventListener('click', (e) => {
-      if (e.target === this.el) this.toolBar.playPauseBtn.toggle();
-    });
-    this.el.addEventListener('dblclick', (e) => {
-      if (e.target === this.el) this.toolBar.fullScreen.toggle();
-    });
+    // this.el.addEventListener('click', (e) => {
+    //   if (e.target === this.el) this.toolBar.playPauseBtn.toggle();
+    // });
+    // this.el.addEventListener('dblclick', (e) => {
+    //   if (e.target === this.el) this.toolBar.fullScreen.toggle();
+    // });
 
     this.eventSub = this.event$.subscribe(e => {
       if (e.type === 'reset') {
