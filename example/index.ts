@@ -32,7 +32,38 @@ const player = new Player({
   cover:'http://image.haipaitv.cn/video/20200326/db33fba1dedebf08ee37ddcd1a498f4c.jpg',
   memberOption: {
     avatar:'http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg',
-    comment:[],
+    comment:[
+      {
+        time:1585184699,
+        avatar:"http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg",
+        nickname:'愿得一人心',
+        content:'美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的'
+      },
+      {
+        time:1585184699,
+        avatar:"http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg",
+        nickname:'愿得一人心',
+        content:'美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的'
+      },
+      {
+        time:1585184699,
+        avatar:"http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg",
+        nickname:'愿得一人心',
+        content:'美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的'
+      },
+      {
+        time:1585184699,
+        avatar:"http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg",
+        nickname:'愿得一人心',
+        content:'美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的'
+      },
+      {
+        time:1585184699,
+        avatar:"http://image.haipaitv.cn/headlogo/201804/5ae3172e129b5.jpg",
+        nickname:'愿得一人心',
+        content:'美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的美的不要不要的'
+      }
+    ],
     shop_url:'',
     like:''
   },

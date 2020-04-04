@@ -16,6 +16,8 @@ export enum PlayerEventType {
   like = 'like',
   back = 'back',
   share = 'share',
+  comment = 'comment',
+  empty = 'empty',
 }
 
 export class PlayerEvent {

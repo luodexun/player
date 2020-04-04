@@ -61,42 +61,134 @@ $color-primary: #00D7C6;
       height: 7px;
     }
   }
-
   .member{
-    position: absolute;
-    right: 1rem;
-    bottom: 5rem;
-    width: 4rem;
-    >img{
-      padding: 0 !important;
-      border-radius: 50%;
+    .left{
+      position: absolute;
+      right: 1rem;
+      bottom: 5rem;
+      width: 4rem;
+      >img{
+        padding: 0 !important;
+        border-radius: 50%;
+      }
+      img{
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px 5px 0;
+      }
+      svg{
+        width: 3rem;
+        height: 3rem;
+        padding: 15px 5px 0;
+      }
+      h5{
+        color: white;
+        text-align: center;
+      }
     }
-    img{
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 15px 5px 0;
+
+    .top{
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      height: 3rem;
+      padding: 1.7rem;
+      display: flex;
+      justify-content: flex-start;
+      svg{
+        display: block;
+        height: 3rem;
+        width: 3rem;
+      }
     }
-    h5{
-      color: white;
-      text-align: center;
+
+    .warp{
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: none;
+      .comment{
+        font-family:PingFang SC;
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 60%;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        .header{
+          display: flex;
+          box-sizing: border-box;
+          padding: 1.2rem 1rem;
+          justify-content: space-between;
+          flex: 0 0 auto;
+          div,img{
+            display: block;
+            width: 3rem;
+            height: 3rem;
+          }
+          h5{
+            align-self: center;
+            color: #999999;
+            font-size:1.3rem;
+          }
+        }
+        .content{
+          flex: 1 0 250px;
+          overflow: scroll;
+          li{
+            display: flex;
+            box-sizing: border-box;
+            padding: 1rem 2rem;
+            img{
+              display: block;
+              width: 3.5rem;
+              height: 3.5rem;
+              flex: 0 0 auto;
+              border-radius: 50%;
+            }
+            div{
+              box-sizing: border-box;
+              padding-left: 1rem;
+              h4{
+                color: #999999;
+              }
+              p{
+                color: #333333;
+                font-size: 13px;
+              }
+            }
+          }
+        }
+        .footer{
+          flex: 0 0 auto;
+          box-sizing: border-box;
+          padding: 1.2rem 2rem;
+          input[type=search]{
+            border-radius: .5rem;
+            border: 1px solid #EEEEEE;//必须对默认的border:2px inset覆盖，要不然下面的样式也是白搭
+            width: 100%;
+            background: #EEEEEE;
+            padding: 1rem;
+            outline: none;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            :focus{
+              position:fixed;
+              top:50px;
+            }
+          }
+        }
+      }
     }
   }
 
-  .top{
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 0;
-    height: 3rem;
-    padding: 1.7rem;
-    display: flex;
-    justify-content: space-between;
-    img{
-      display: block;
-      height: 100%;
-    }
-  }
+
 
   .video {
     position: absolute;
