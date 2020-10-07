@@ -6,10 +6,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    'zaojiu-player': path.resolve(__dirname, './src/index.ts'),
-    'zaojiu-player.min': path.resolve(__dirname, './src/index.ts'),
-    'zaojiu-player-flash.plugin': path.resolve(__dirname, './src/flash.ts'),
-    'zaojiu-player-flash.plugin.min': path.resolve(__dirname, './src/flash.ts')
+    'player': path.resolve(__dirname, './src/index.ts'),
+    'player.min': path.resolve(__dirname, './src/index.ts'),
+    'player-flash.plugin': path.resolve(__dirname, './src/flash.ts'),
+    'player-flash.plugin.min': path.resolve(__dirname, './src/flash.ts')
   },
   output: {
     filename: "[name].js",
