@@ -1,9 +1,6 @@
 import {BaseElement} from './interface';
 import {Option, PlayerEvent, PlayerEventType} from './model';
-import {Observable} from "rxjs/Observable";
-import {Subscription} from "rxjs/Subscription";
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/operator/first';
+import {Subject,Observable,Subscription} from "rxjs";
 import {createElementByString} from "./utils";
 import * as $ from "jquery";
 const styles = require('./player.scss');
@@ -272,7 +269,7 @@ export class LeftControler {
 
   public render() {
     if (this.rendered) throw new Error('video already rendered');
-    this.avatarEl.src = this.opt.memberOption.avatar;
+    this.avatarEl.src = '';
     this.container.el.appendChild(this.el);
     this.rendered = true;
   }
@@ -470,12 +467,7 @@ export class CommentControler {
   }
 
   public showEl(){
-    if(this.opt.memberOption.comment.length === 0){
-      this.eventSource.next(new PlayerEvent(PlayerEventType.empty, '123'));
-    }else {
-      this.refresh();
-    }
-    $(this.el).slideDown();
+
   }
 
   public hideEl(){
@@ -483,38 +475,9 @@ export class CommentControler {
   }
 
   private refresh(){
-    $(this.ulEl).empty();
-    $(this.msgEl).text(`${this.opt.memberOption.comment.length}条评论`);
-    for(let item of this.opt.memberOption.comment){
-      let li = $(createElementByString(liTemplate).item(0) as HTMLElement);
-      li.find('img').attr('src',item.avatar);
-      li.find('h4').text(`${item.nickname}    ${this.toTime(item.time)}`);
-      li.find('p').text(item.content);
-      $(this.ulEl).append(li);
-    }
+
 
   }
-  private toTime(time:number){
-    let timestamp=new Date().getTime();
-    let t = timestamp-time*1000;
-    if(t<=180*1000){
-      return '刚刚'
-    }
-    if(t<=3600*1000){
-      return `${Math.floor(t/(60*1000))}分钟前`
-    }
-    if(t<=3600*24*1000){
-      return `${Math.floor(t/(3600*1000))}个小时前`
-    }
-    if(t<=3600*24*30*1000){
-      return `${Math.floor(t/(3600*24*1000))}天前`
-    }
-    if(t>3600*24*30*12*1000){
-      let d= new Date(time*1000);
-      return `${d.getMonth()+1}月${d.getDate()}日 ${d.getHours()}:${d.getMinutes()}`
-    }
-  }
-
 
   public render() {
     if (this.rendered) throw new Error('video already rendered');

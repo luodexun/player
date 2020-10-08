@@ -1,9 +1,8 @@
 import {BaseElement, VideoElement} from './interface';
 import {PlayerEvent, PlayerEventType, Option, SourceOption, VideoSourceChangeEventDetail} from './model';
-import {Observable} from "rxjs/Observable";
-import {Subscription} from "rxjs/Subscription";
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/operator/first';
+import {Subject,Observable,Subscription} from "rxjs";
+import {filter,first} from "rxjs/operators"
+import * as Hls from "hls.js";
 import {createHTMLVideoElement} from "./html";
 import {canPlayTypeByFlash, createElementByString, IS_SUPPORT_FLASH, isRtmp} from "./utils";
 import {Player} from "./player";
@@ -70,16 +69,20 @@ export class VideoPlayer {
 
     const currentTimeCache = this.el ? this.el.currentTime : 0;
     this.setVideoSrc(currentSrc);
-    this.event$.filter(e => e.type === 'loadedmetadata').first().subscribe(e => {
+    this.event$.pipe(
+      filter(e => e.type === 'loadedmetadata'),
+      first()
+    ).subscribe(e => {
       if (currentSrc instanceof SourceOption && !isRtmp(currentSrc)) this.el.currentTime = currentTimeCache;
       this.el.play();
     });
   }
 
   private bindEvent() {
-    this.eventSub = this.event$.filter(e => e.type === PlayerEventType.RetryPlay).subscribe(e => {
+    this.eventSub = this.event$.pipe(
+      filter(e => e.type === PlayerEventType.RetryPlay)
+    ).subscribe(e => {
       if (!this.el) return;
-
       const srcCache = this.el.src;
       const currentTime = this.el.currentTime;
       this.el.src = null;
@@ -102,7 +105,16 @@ export class VideoPlayer {
     this.containerEl.innerHTML = '';
 
     if (src instanceof SourceOption) {
-      if(document.createElement('video').canPlayType(src.minetype)) {
+      if(src.minetype == 'video/m3u8'){
+        this.el = createHTMLVideoElement();
+        var hls = new Hls();
+        hls.loadSource(src.src);
+        hls.attachMedia(this.el as HTMLVideoElement);
+        // hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        //   self.el.play();
+        // });
+        this.onVideoEvent();
+      }else if(document.createElement('video').canPlayType(src.minetype)) {
         this.el = createHTMLVideoElement();
         this.onVideoEvent();
         this.el.src = src.src;

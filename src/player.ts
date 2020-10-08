@@ -3,10 +3,9 @@ import {Language, Option, PlayerEvent, PlayerEventType} from "./model";
 import {BaseElement} from "./interface";
 import {createElementByString, IS_MOBILE} from "./utils";
 import {Controls} from "./controls";
-import {MemberControler} from './member';
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/operator/filter';
-import {Observable} from "rxjs/Observable";
+// import {MemberControler} from './member';
+import {Subject,Observable} from "rxjs";
+import { filter } from "rxjs/operators";
 import * as _ from 'lodash';
 const styles = require('./player.scss');
 
@@ -20,7 +19,7 @@ export class Player implements BaseElement {
   el: HTMLElement;
   video: VideoPlayer;
   controls: Controls;
-  member:MemberControler;
+  // member:MemberControler;
   eventSource = new Subject<PlayerEvent>();
   event$: Observable<PlayerEvent> = this.eventSource.asObservable();
   option: Option;
@@ -45,7 +44,6 @@ export class Player implements BaseElement {
         option.element,
         option.playList,
         option.cover,
-        option.memberOption,
         option.autoplay,
         option.preload,
         option.loop,
@@ -58,7 +56,6 @@ export class Player implements BaseElement {
     this.el = createElementByString(template).item(0) as HTMLElement;
     this.prepareVideo();
     this.prepareControls();
-    this.prepareMember();
     this.perpareVideoSource();
     this.bindEvent();
     this.render();
@@ -78,16 +75,18 @@ export class Player implements BaseElement {
     this.video = new VideoPlayer(this, this.option, this.eventSource, this.event$);
   }
 
-  private prepareMember() {
-    this.member = new MemberControler(this, this.option, this.eventSource, this.event$);
-  }
+  // private prepareMember() {
+  //   this.member = new MemberControler(this, this.option, this.eventSource, this.event$);
+  // }
 
   private perpareVideoSource() {
     this.video.setSrc(this.option.playList);
   }
 
   private bindEvent() {
-    this.event$.filter(e => _.indexOf([PlayerEventType.like,PlayerEventType.share,PlayerEventType.goods,PlayerEventType.back], e.type) !== -1).subscribe((e:PlayerEvent|any)=>{
+    this.event$.pipe(
+      filter(e => _.indexOf([PlayerEventType.like,PlayerEventType.share,PlayerEventType.goods,PlayerEventType.back], e.type) !== -1)
+    ).subscribe((e:PlayerEvent|any)=>{
       this.option.on(e);
     })
 }
@@ -95,8 +94,6 @@ export class Player implements BaseElement {
   render() {
     this.video.render();
     this.controls.render();
-    this.member.render();
-
     const container: HTMLElement = this.getTargetElement();
     const style: CSSStyleDeclaration = window.getComputedStyle ? getComputedStyle(container, null) : (<any>container)['currentStyle'];
     if (style.position !== 'relative' && style.position !== 'absolute') {
@@ -113,7 +110,6 @@ export class Player implements BaseElement {
   destroy() {
     this.video.destroy();
     this.controls.destroy();
-    this.member.destroy();
     const container = this.getTargetElement();
     container.style.position = this.containerPositionCache;
     container.innerHTML = '';

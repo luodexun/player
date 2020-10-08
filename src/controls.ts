@@ -9,9 +9,8 @@ import {
   VideoSourceChangeEventDetail
 } from "./model";
 import {Player} from "./player";
-import {Subscription} from "rxjs/Subscription";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
+import {Subscription,Observable,Subject,pipe} from "rxjs";
+import { filter } from "rxjs/operators";
 import {VideoPlayer} from "./video";
 const styles = require('./player.scss');
 
@@ -1139,7 +1138,9 @@ export class FullScreenControl implements BaseElement {
 
   private bindEvent() {
     this.el.addEventListener('click', () => this.toggle());
-    this.eventSub = this.event$.filter(e => e.type === 'ready').subscribe(e => {
+    this.eventSub = this.event$.pipe(
+      filter(e => e.type === 'ready')
+    ).subscribe(e => {
       this.prepareFullScreenApi();
     });
   }
@@ -1307,8 +1308,6 @@ export class Controls implements BaseElement {
     this.toolBar = new ToolBarControl(this, option, video, player);
     this.loading = new LoadingControl(this, video, player.event$, player.eventSource);
     this.error = new ErrorControl(this, video, player.language, player.event$, player.eventSource);
-
-
     this.bindEvent();
   }
 

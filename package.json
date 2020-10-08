@@ -28,11 +28,11 @@
     "jquery": "^3.4.1",
     "layerui": "^3.1.1",
     "loadsh": "0.0.4",
-    "rxjs": "^5.4.2"
+    "rxjs": "^6.6.3"
   },
   "types": "types/index.d.ts",
   "devDependencies": {
-    "@types/hls.js": "^0.7.4",
+    "@types/hls.js": "^0.7.7",
     "@types/jquery": "^3.3.34",
     "@types/lodash": "^4.14.149",
     "@types/node": "^8.0.16",
