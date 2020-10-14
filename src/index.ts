@@ -1,3 +1,3 @@
 import { Player } from "./player";
 
-module.exports = Player;
+export default Player;

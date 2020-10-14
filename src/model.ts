@@ -79,33 +79,6 @@ export class ControlsOption {
   }
 }
 
-// export class MemberOption {
-//   avatar: string;
-//   comment: Comment[];
-//   shop_url: string;
-//   like:string;
-//
-//   constructor(avatar: string, comment: Comment[], shop_url: string, like:string) {
-//     this.avatar = avatar;
-//     this.comment = comment;
-//     this.shop_url = shop_url;
-//     this.like = like;
-//   }
-// }
-//
-// export class Comment {
-//   time: number;
-//   content: string;
-//   avatar: string;
-//   nickname:string;
-//
-//   constructor(time: number, content: string, avatar: string, nickname:string) {
-//     this.time = time;
-//     this.content = content;
-//     this.avatar = avatar;
-//     this.nickname = nickname;
-//   }
-// }
 
 export class SourceOption {
   src: string;

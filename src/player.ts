@@ -19,7 +19,6 @@ export class Player implements BaseElement {
   el: HTMLElement;
   video: VideoPlayer;
   controls: Controls;
-  // member:MemberControler;
   eventSource = new Subject<PlayerEvent>();
   event$: Observable<PlayerEvent> = this.eventSource.asObservable();
   option: Option;
@@ -74,10 +73,6 @@ export class Player implements BaseElement {
   private prepareVideo() {
     this.video = new VideoPlayer(this, this.option, this.eventSource, this.event$);
   }
-
-  // private prepareMember() {
-  //   this.member = new MemberControler(this, this.option, this.eventSource, this.event$);
-  // }
 
   private perpareVideoSource() {
     this.video.setSrc(this.option.playList);

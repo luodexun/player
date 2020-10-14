@@ -9,7 +9,7 @@ import {
   VideoSourceChangeEventDetail
 } from "./model";
 import {Player} from "./player";
-import {Subscription,Observable,Subject,pipe} from "rxjs";
+import {Subscription,Observable,Subject} from "rxjs";
 import { filter } from "rxjs/operators";
 import {VideoPlayer} from "./video";
 const styles = require('./player.scss');

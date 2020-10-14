@@ -1,8 +1,9 @@
 {
-  "name": "zaojiu-player",
+  "name": "@luodexun/player",
   "version": "2.0.10",
   "description": "video player for xingshu co., ltd.",
-  "main": "dist/zaojiu-player.js",
+  "main": "dist/index.js",
+  "type": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./example/webpack.config.js",
